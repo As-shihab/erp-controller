@@ -3,8 +3,8 @@ import {
   SideNavigationItem,
   SideNavigationSubItem,
 } from "@ui5/webcomponents-react";
-import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import GridTable from "../../components/anaylitcaltable/analyticaltable";
 
 function PropertyPro() {
   const navItems = [
@@ -24,7 +24,7 @@ function PropertyPro() {
   ];
 
   return (
-    <div className="layout flex flex-start">
+    <div className="grid grid-cols-7">
       <div className="h-[95vh]  shadow-sm m-2 ">
         <SideNavigation className="rounded-lg">
           {navItems.map((item, index) => (
@@ -38,7 +38,6 @@ function PropertyPro() {
               {item.subItems &&
                 item.subItems.map((subItem, subIndex) => (
                   <Link to="type">
-            
                     <SideNavigationSubItem key={subIndex} text={subItem.text} />
                   </Link>
                 ))}
@@ -47,10 +46,11 @@ function PropertyPro() {
         </SideNavigation>
       </div>
 
-      <div className="p-3 rounded-lg shadow-sm w-[98%] m-auto h-[95vh]">
-        <Outlet />
+      <div className="col-span-6">
+        <GridTable/>
       </div>
     </div>
+
   );
 }
 

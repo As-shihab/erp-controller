@@ -1,27 +1,10 @@
-import { AnalyticalTable, Bar, Input } from '@ui5/webcomponents-react'
+import { AnalyticalTable, Bar, Input, Title } from '@ui5/webcomponents-react'
 import React from 'react'
 
-export default function Analyticaltable() {
+export default function GridTable() {
   return (
- <div>
-
-<Bar 
-design='Header'
-startContent={<h1>Title the nature</h1>}
-
-endContent={
-  <div>
-    <Input
-    />
-  </div>
-}
->
-
-
-
-</Bar>
-
-     <AnalyticalTable
+    <AnalyticalTable
+    className='p-3 shadow-sm'
     columns={[
       {
         Header: 'Name',
@@ -112,6 +95,5 @@ endContent={
 
   }
  />
- </div>
   )
 }

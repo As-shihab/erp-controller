@@ -1,21 +1,13 @@
 import {
-  Bar,
-  Button,
   Card,
   CardHeader,
   Icon,
-  Input,
-  Title,
   Toolbar,
 } from "@ui5/webcomponents-react";
 import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <>
-    
-
- 
-
       <div className="px-4">
         <Link to="/propertypro">
           <Card
@@ -26,9 +18,7 @@ export default function Home() {
                 titleText="TeamSpace"
               />
             }
-            style={{
-              width: "300px",
-            }}
+          
           >
             <Toolbar design="Transparent" slot="footer">
               <Icon name="add" slot="end" />
