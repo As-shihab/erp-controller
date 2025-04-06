@@ -1,8 +1,12 @@
-import { AnalyticalTable, Bar, Input, Title } from '@ui5/webcomponents-react'
+import { AnalyticalTable, Bar, Button, Input, Label, SegmentedButton, SegmentedButtonItem, Title, Toolbar } from '@ui5/webcomponents-react'
 import React from 'react'
 
 export default function GridTable() {
   return (
+    <div>
+
+
+
     <AnalyticalTable
     className='p-3 shadow-sm'
     columns={[
@@ -95,5 +99,6 @@ export default function GridTable() {
 
   }
  />
+ </div>
   )
 }
