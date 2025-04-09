@@ -1,12 +1,16 @@
 import { AnalyticalTable, Bar, Button, Input, Label, SegmentedButton, SegmentedButtonItem, Title, Toolbar } from '@ui5/webcomponents-react'
-import React from 'react'
-
 export default function GridTable() {
   return (
     <div>
-
-
-
+<Bar
+  design="Header"
+  endContent={<span><Button   design='Emphasized'>New</Button></span>}
+  startContent={<span>Start Content</span>}
+>
+  <span>
+    Center Content
+  </span>
+</Bar>
     <AnalyticalTable
     className='p-3 shadow-sm'
     columns={[
@@ -98,6 +102,9 @@ export default function GridTable() {
     ]
 
   }
+
+  minRows={27}
+  rowHeight={30}
  />
  </div>
   )
