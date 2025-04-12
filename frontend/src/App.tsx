@@ -6,9 +6,7 @@ import Header from "./Shared/Components/Header/Header";
 function App() {
   return (
     <>
-      {/* Header */}
-
-      {/* router  */}
+   
       <Router />
     </>
   );
