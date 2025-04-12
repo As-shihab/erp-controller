@@ -666,16 +666,16 @@
         },
         {
             "name": "flat3/lodata",
-            "version": "v5.35.0",
+            "version": "v5.35.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/flat3/lodata.git",
-                "reference": "7cebc720d2eeff8c4c98f79245094e5b2f19e71d"
+                "reference": "09cab076ee3ac1ea0befcfe2c0c1615d9a2159ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flat3/lodata/zipball/7cebc720d2eeff8c4c98f79245094e5b2f19e71d",
-                "reference": "7cebc720d2eeff8c4c98f79245094e5b2f19e71d",
+                "url": "https://api.github.com/repos/flat3/lodata/zipball/09cab076ee3ac1ea0befcfe2c0c1615d9a2159ac",
+                "reference": "09cab076ee3ac1ea0befcfe2c0c1615d9a2159ac",
                 "shasum": ""
             },
             "require": {
@@ -758,9 +758,9 @@
             ],
             "support": {
                 "issues": "https://github.com/flat3/lodata/issues",
-                "source": "https://github.com/flat3/lodata/tree/v5.35.0"
+                "source": "https://github.com/flat3/lodata/tree/v5.35.1"
             },
-            "time": "2025-03-11T09:27:55+00:00"
+            "time": "2025-04-10T07:56:52+00:00"
         },
         {
             "name": "fruitcake/php-cors",

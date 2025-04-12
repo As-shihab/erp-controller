@@ -20,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // \Lodata::discover(\App\Models\User::class);
+        Lodata::discover(\App\Models\LocationType::class);
+        Lodata::discover(\App\Models\User::class);
 
     }
 
