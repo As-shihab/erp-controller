@@ -7,7 +7,6 @@ import {
   ShellBarItem,
 } from "@ui5/webcomponents-react";
 import Logo from "../../../../public/control.png";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {

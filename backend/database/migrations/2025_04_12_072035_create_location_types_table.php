@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('location_types', function (Blueprint $table) {
             $table->id();
+            $table->boolean('active')->default(true);
             $table->string('custom_id');
             $table->string('name');
             $table->timestamps();

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import GlobalTable from "../../../Shared/Components/GlobalTable/GlobalTable";
 import Type from "./Components/Type";
+import { LocationType } from "../../../Shared/Model/LocationType";
 
 export default function LocationTyps() {
   const [isNew, setNew] = useState(false);
@@ -8,7 +9,7 @@ export default function LocationTyps() {
   const columns = [
     {
       Header: "Name",
-      accessor: "name",
+      accessor: "active",
     },
     {
       Header: "Age",
@@ -31,21 +32,25 @@ export default function LocationTyps() {
 
   useEffect(() => {
     if (isNew) {
-      setStatus("new");
+      setStatus("post");
     } else {
-      setStatus("edit");
+      setStatus("put");
     }
   }, [isNew]);
 
   return (
     <div>
       <Type open={{ isOpen: isNew, setOpen: setNew }} status={status} />
-
       <GlobalTable
         columns={columns}
         data={data}
         NewButtonText="New"
         newButtonToggle={{ isNew: isNew, setNew: setNew }}
+        network={{
+          Model: LocationType,
+          endpoint: "LocationTypes",
+          isOdata: true,
+        }}
       />
     </div>
   );
