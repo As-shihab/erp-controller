@@ -9,12 +9,13 @@ import { Http } from "../../../Http/Http";
 import { useEffect, useState } from "react";
 
 export default function GlobalTable(props: any | undefined) {
-  const { columns, data, NewButtonText, newButtonToggle, network } = props;
+  const { columns, NewButtonText, newButtonToggle, network } = props;
   const { endpoint, isOdata, Model, StaticData } = network;
   const { isNew, setNew } = newButtonToggle;
   const http = new Http();
   let TableData: any[] = [];
   const [isLoading, setLoading] = useState(false);
+  const data = [{ name: "shihab", age: 12, fname: "rakib" }];
   useEffect(() => {
     if (!StaticData) {
       FetchData();
@@ -30,11 +31,15 @@ export default function GlobalTable(props: any | undefined) {
       .get(endpoint, isOdata ? true : false)
       .then((res: any) => {
         if (Model) {
-          let data = new Model();
-          Object.values(res.data.value).map((items: any) => {
-            console.log(items);
+          res.data.value.map((data: any) => {
+            const storedata = Object.assign(data);
+            TableData.push(storedata);
           });
-          console.log(data);
+
+          if (Array.isArray(TableData)) {
+            console.log(TableData);
+          }
+
           CloseAction();
         }
       })
@@ -46,7 +51,7 @@ export default function GlobalTable(props: any | undefined) {
   };
 
   return (
-    <div style={{ padding: "5px 5px", background: "#fff" }}>
+    <div  style={{ padding: "5px 5px", background: "#fff" }}>
       <Bar
         design="Header"
         startContent={
@@ -76,10 +81,16 @@ export default function GlobalTable(props: any | undefined) {
       >
         <Title>Location Types</Title>
       </Bar>
-
+      {Object.values(TableData).map((data: any) => {
+        return (
+          <div>
+            <p>{data.name}</p>
+          </div>
+        );
+      })}
       <AnalyticalTable
         columns={columns}
-        data={TableData || []}
+        data={TableData}
         minRows={20}
         loading={isLoading}
         additionalEmptyRowsCount={50}

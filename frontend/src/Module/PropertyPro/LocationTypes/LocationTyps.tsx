@@ -9,7 +9,7 @@ export default function LocationTyps() {
   const columns = [
     {
       Header: "Name",
-      accessor: "active",
+      accessor: "name",
     },
     {
       Header: "Age",
@@ -17,7 +17,7 @@ export default function LocationTyps() {
     },
     {
       Header: "Friend Name",
-      accessor: "friend.name",
+      accessor: "fname",
     },
   ];
 

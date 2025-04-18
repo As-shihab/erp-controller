@@ -7,8 +7,8 @@ import {
 import NotFound from "../Pages/Error/NotFound";
 import HomeLayout from "../Layout/HomeLaout/HomeLayout";
 import PropertyPro from "../Module/PropertyPro/PropertyPro";
-import Overview from "../Module/PropertyPro/Overview/Overview";
 import LocationTyps from "../Module/PropertyPro/LocationTypes/LocationTyps";
+import Overview from "../Module/PropertyPro/Overview/OverView";
 import Header from "../Shared/Components/Header/Header";
 export default function AppRouter(): JSX.Element {
   return (

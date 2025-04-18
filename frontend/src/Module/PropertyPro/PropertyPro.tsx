@@ -11,15 +11,16 @@ import { Outlet } from "react-router-dom";
 export default function PropertyPro() {
   return (
     <>
-      <div className="relative overflow-hidden h-[100vh]">
+      <div className="relative  h-[calc(100vh-52px)]">
         <NavigationLayout
           mode="Expanded"
+          className="h-full rounded-lg"
           sideContent={
             <SideNavigation
               onSelectionChange={function Xs() {}}
               slot="sideContent"
             >
-              <SideNavigationItem icon="home" text="Home" />
+              <SideNavigationItem icon="Chart-Tree-Map" text="OverView" />
               <SideNavigationGroup expanded text="Group 1">
                 <SideNavigationItem expanded icon="locate-me" text="Item 1">
                   <SideNavigationSubItem text="Sub Item 1" />
@@ -67,7 +68,7 @@ export default function PropertyPro() {
             </SideNavigation>
           }
         >
-          <div>
+          <div className="  h-full ml-3 rounded-lg shadow-lg">
             <Outlet />
           </div>
         </NavigationLayout>
