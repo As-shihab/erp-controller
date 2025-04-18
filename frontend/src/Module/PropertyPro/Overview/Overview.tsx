@@ -8,13 +8,13 @@ export default function Overview() {
   return (
     <div className="h-full">
       <div className="grid grid-cols-3 gap-2 h-full">
-        <div className="col-span-2 grid grid-rows-2 gap-1 h-full ">
+        <div className="col-span-2 grid grid-rows-2 gap-2 h-full ">
           <div className="h-full w-full">
             <Card className="h-full w-full">
               <RealTimeChart />
             </Card>
           </div>
-          <div className="bg-blue-600 gap-2 grid grid-cols-3">
+          <div className=" gap-2 grid grid-cols-3">
             <Card className="h-full col-span-2 w-full">
               <LineChartView />
             </Card>
@@ -29,7 +29,11 @@ export default function Overview() {
               <LegendChartView />
             </Card>
           </div>
-          <div className="bg-red-600"></div>
+          <div className="h-full ">
+             <Card className="h-full">
+              <LegendChartView />
+            </Card>
+          </div>
         </div>
       </div>
     </div>
