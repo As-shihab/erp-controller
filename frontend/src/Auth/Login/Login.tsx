@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./Login.css"; // External CSS for animations
 
 export default function Login() {

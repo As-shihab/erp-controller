@@ -1,4 +1,6 @@
+// models/LocationType.ts
 import { Deserializable } from "../Interface/deserializable";
+
 export class LocationType implements Deserializable {
   id?: number;
   active?: boolean = true;

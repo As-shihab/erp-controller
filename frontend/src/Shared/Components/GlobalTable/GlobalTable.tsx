@@ -5,96 +5,109 @@ import {
   Input,
   Title,
 } from "@ui5/webcomponents-react";
-import { Http } from "../../../Http/Http";
-import { useEffect, useState } from "react";
+import { Http } from "../../../Http/Http"; // Replace with your actual path
+import { useEffect, useState, useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
-export default function GlobalTable(props: any | undefined) {
+// Replace with your actual path
+
+export default function GlobalTable(props: any) {
+  const { refreshTable, setRefrashTable } = useContext(GlobalContext);
   const { columns, NewButtonText, newButtonToggle, network } = props;
-  const { endpoint, isOdata, Model, StaticData } = network;
+  const { endpoint, isOdata, Model,  } = network;
+  // StaticData
   const { isNew, setNew } = newButtonToggle;
   const http = new Http();
-  let TableData: any[] = [];
   const [isLoading, setLoading] = useState(false);
-  const data = [{ name: "shihab", age: 12, fname: "rakib" }];
+  const [TableData, setTableData] = useState([]);
+  const [TableColumns, setTableColumns] = useState([]);
+
   useEffect(() => {
-    if (!StaticData) {
+    FetchData();
+    setTableColumns(columns);
+
+    if (refreshTable) {
       FetchData();
     }
-    if (StaticData) {
-      TableData = Object.assign(StaticData);
-    }
-  }, [StaticData]);
+  }, [refreshTable]);
 
   const FetchData = () => {
+    console.log(columns);
     setLoading(true);
     http
-      .get(endpoint, isOdata ? true : false)
+      .get(endpoint, isOdata ?? false)
       .then((res: any) => {
-        if (Model) {
-          res.data.value.map((data: any) => {
-            const storedata = Object.assign(data);
-            TableData.push(storedata);
-          });
-
-          if (Array.isArray(TableData)) {
-            console.log(TableData);
-          }
-
-          CloseAction();
+        closeAction();
+        console.log("Fetched data:", res.data);
+        if (Model && res.data?.value?.length > 0) {
+          const formatted = res.data.value.map((data: any) =>
+            new Model().deserialize(data)
+          );
+          setTableData(formatted);
+        } else {
+          setTableData([]);
         }
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Fetch failed:", err);
+      });
   };
 
-  const CloseAction = () => {
+  const closeAction = () => {
+    setRefrashTable(false);
     setLoading(false);
   };
 
   return (
-    <div  style={{ padding: "5px 5px", background: "#fff" }}>
+    <div style={{ padding: "5px"} }>
       <Bar
         design="Header"
         startContent={
           <span>
-            <b>Total</b>(12)
+            <b>Total</b> ({TableData.length})
           </span>
         }
         endContent={
-          <>
-            <div className="flex gap-2">
-              <Input placeholder="Search" />
-              {NewButtonText ? (
-                <Button
-                  onClick={() => {
-                    setNew(!isNew);
-                  }}
-                  className="border-2 border-slate-300"
-                  design="Default"
-                  icon={NewButtonText == "New" ? "add" : ""}
-                >
-                  New
-                </Button>
-              ) : null}
-            </div>
-          </>
+          <div className="flex gap-2">
+            <Input placeholder="Type to filter data" readonly={isLoading} />
+            {NewButtonText ? (
+              <Button
+                disabled={isLoading}
+                onClick={() => setNew(!isNew)}
+                className="border-2 border-slate-300"
+                design="Default"
+                icon={NewButtonText === "New" ? "add" : ""}
+              >
+                {NewButtonText}
+              </Button>
+            ) : null}
+          </div>
         }
       >
         <Title>Location Types</Title>
       </Bar>
-      {Object.values(TableData).map((data: any) => {
-        return (
-          <div>
-            <p>{data.name}</p>
-          </div>
-        );
-      })}
+
       <AnalyticalTable
-        columns={columns}
+        style={{
+          height:'100vh',
+          minWidth: "100%",
+          backgroundColor: "white",
+        }}
+        className="h-sreen"
+        headerRowHeight={40}
+        rowHeight={40}
+        columns={TableColumns}
         data={TableData}
-        minRows={20}
         loading={isLoading}
-        additionalEmptyRowsCount={50}
+        minRows={40}
+        // additionalEmptyRowsCount={
+        // TableData.length < 20 ? 20 - TableData.length : 0
+        // }
       />
+
+      {/* For debugging */}
+      {/* <pre>{JSON.stringify(TableData, null, 2)}</pre> */}
     </div>
   );
 }

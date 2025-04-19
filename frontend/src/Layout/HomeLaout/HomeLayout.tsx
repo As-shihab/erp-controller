@@ -5,22 +5,19 @@ export default function HomeLayout() {
   return (
     <>
       <div className="grid gap-3  grid-cols-5">
-        <Link to='/propertypro'>
-        <div className="card rounded-sm shadow-sm ">
-                 <Bar
-  design="Header"
-  endContent={<span>PropertyPro</span>}
-  startContent={<span>Start Content</span>}
->
-</Bar>
+        <Link to="/propertypro">
+          <div className="card rounded-sm shadow-sm ">
+            <Bar
+              design="Header"
+              endContent={<span>PropertyPro</span>}
+              startContent={<span>Start Content</span>}
+            ></Bar>
 
-<Toolbar slot="footer">
-<Title>Footer</Title>
-</Toolbar>
-        </div>
+            <Toolbar slot="footer">
+              <Title>Footer</Title>
+            </Toolbar>
+          </div>
         </Link>
-
-
       </div>
     </>
   );

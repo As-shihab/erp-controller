@@ -6,25 +6,31 @@ import {
   Input,
   BusyIndicator,
 } from "@ui5/webcomponents-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Http } from "../../../../Http/Http";
 import { LocationType } from "../../../../Shared/Model/LocationType";
+import { Toaster } from "../../../../Shared/Components/SweetAlert/Toaster";
+import { GlobalContext } from "../../../../Shared/context/GlobalContext";
 
 export default function Type({ open, status }: any) {
+  const { setRefrashTable } = useContext(GlobalContext);
   const { isOpen, setOpen } = open;
   const [isLoading, setLoading] = useState(false);
   const http = new Http();
   const data: LocationType = new LocationType().deserialize({});
   const onSave = () => {
     setLoading(true);
-
+    console.log(data);
     if (status === "post") {
+      data.custom_id = "ashdlad";
       console.log(data);
       http
         .post("LocationTypes", true, data)
         .then((res: any) => {
           console.log(res);
+          Toaster("post");
           closeDialog();
+          setRefrashTable(true);
         })
         .catch((err) => console.log(err));
     }
@@ -43,6 +49,7 @@ export default function Type({ open, status }: any) {
   const closeDialog = () => {
     setLoading(false);
     status == "";
+    data.name = "";
     setOpen(false);
   };
 

@@ -3,44 +3,39 @@ import {
   SideNavigation,
   SideNavigationItem,
   SideNavigationGroup,
-  SideNavigationSubItem,
+  Card,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import "@ui5/webcomponents/dist/Assets.js";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 export default function PropertyPro() {
+    const navigate = useNavigate();
   return (
     <>
       <div className="relative  h-[calc(100vh-52px)]">
         <NavigationLayout
           mode="Expanded"
-          className="h-full rounded-lg"
+          
+        
           sideContent={
             <SideNavigation
-              onSelectionChange={function Xs() {}}
+              onSelectionChange={(e) => {
+        const selectedKey = e.detail.item.dataset.key;
+        navigate(selectedKey? selectedKey : '/');
+      }}
               slot="sideContent"
+              className="rounded-2xl "
             >
-              <SideNavigationItem icon="Chart-Tree-Map" text="OverView" />
-              <SideNavigationGroup expanded text="Group 1">
-                <SideNavigationItem expanded icon="locate-me" text="Item 1">
-                  <SideNavigationSubItem text="Sub Item 1" />
-                  <SideNavigationSubItem text="Sub Item 2" />
-                </SideNavigationItem>
-                <SideNavigationItem expanded icon="calendar" text="Item 2">
-                  <SideNavigationSubItem text="Sub Item 3" />
-                  <SideNavigationSubItem text="Sub Item 4" />
-                </SideNavigationItem>
-                <SideNavigationItem
-                  expanded
-                  icon="activity-assigned-to-goal"
-                  text="Item 3"
-                >
-                  <SideNavigationSubItem text="Sub Item 5" />
-                  <SideNavigationSubItem text="Sub Item 6" />
-                </SideNavigationItem>
-              </SideNavigationGroup>
+              <SideNavigationItem
+                icon="Chart-Tree-Map"
+                text="OverView"
+              data-key="/"
+              />
+
               <SideNavigationGroup expanded text="Group 2">
-                <SideNavigationItem icon="history" text="Item 4" />
+                
+                  <SideNavigationItem data-key="location-types" icon="history" text="Item 4" />
+     
                 <SideNavigationItem icon="source-code" text="Item 5" />
                 <SideNavigationItem icon="background" text="Item 6" />
               </SideNavigationGroup>
@@ -68,8 +63,10 @@ export default function PropertyPro() {
             </SideNavigation>
           }
         >
-          <div className="  h-full ml-3 rounded-lg shadow-lg">
-            <Outlet />
+          <div className="  h-full  rounded-lg shadow-lg">
+           <Card className="h-full">
+             <Outlet />
+           </Card>
           </div>
         </NavigationLayout>
       </div>

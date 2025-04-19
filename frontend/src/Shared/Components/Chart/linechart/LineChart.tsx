@@ -106,11 +106,11 @@ const LineChartView: React.FC = () => {
       strokeOpacity: 0,
     });
 
-    series.columns.template.adapters.add("fill", (fill, target) => {
+    series.columns.template.adapters.add("fill", (_fill, target) => {
       return chart.get("colors")!.getIndex(series.columns.indexOf(target));
     });
 
-    series.columns.template.adapters.add("stroke", (stroke, target) => {
+    series.columns.template.adapters.add("stroke", (_stroke, target) => {
       return chart.get("colors")!.getIndex(series.columns.indexOf(target));
     });
 
