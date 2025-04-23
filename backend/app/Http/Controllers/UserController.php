@@ -11,45 +11,51 @@ use Mockery\Expectation;
 
 class UserController extends Controller
 {
-    public function Signup(Request $request)
-    {
-        try {
 
+   public function Signup(Request $request)
+{
+    try {
+        // Validate incoming request
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+        ]);
 
-            $validate = Validator::make($request->all(), [
-                'name' => 'required',
-                'email' => 'required|email|unique:users',
-                'password' => 'required',
-            ]);
-
-            if ($validate->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validate->errors()
-
-                ], 401);
-            }
-
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
-
-            $user_token = $user->createToken;
-
+        if ($validate->fails()) {
             return response()->json([
-                'message' => 'user created successfully',
-                'token' => $user_token
-            ]);
-        } catch (Expectation $e) {
-            return response()->json([
-                'message' => 'somthing went wrong',
-
-            ], 401);
+                'status' => false,
+                'message' => 'Validation error',
+                'errors' => $validate->errors()
+            ], 422);
         }
+
+        // Create user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        // Generate API token
+        $user_token = $user->createToken('User-Token')->plainTextToken;
+
+        return response()->json([
+            'status' => true,
+            'message' => 'User created successfully',
+            'token' => $user_token,
+            'user' => $user
+        ], 201);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Something went wrong',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
+
 
     public function Login(Request $request)
     {
@@ -85,7 +91,7 @@ class UserController extends Controller
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
-                'access_token' => $token,
+                'User_token' => $token,
                 'user' => $user
             ]);
         } catch (Expectation $e) {

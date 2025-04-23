@@ -14,7 +14,7 @@ export class Auth {
     this.http
       .get("User", false)
       .then((result: any) => {
-        console.log(result);
+        console.log(result.data);
       })
       .catch((err) => console.log(err));
   }
@@ -22,14 +22,26 @@ export class Auth {
 
 function Root() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const UserToken = localStorage.getItem("UserToken");
+  const UserToken = localStorage.getItem("User_Token");
 
   useEffect(() => {
     const auth = new Auth(new Http());
-    if (UserToken) {
-      setIsLoggedIn(true);
-    } else {
-      auth.SyncUser();
+    const http = new Http();
+
+    const checkAuth = async () => {
+      if (UserToken) {
+        const isAuthenticated = await http.IsAuthenticate();
+  
+        if (isAuthenticated) {
+          console.log("Authenticated");
+          setIsLoggedIn(true);
+        }
+      } else {
+        auth.SyncUser();
+      }
+    };
+    if (!isLoggedIn) {
+      checkAuth();
     }
   }, [UserToken]);
 

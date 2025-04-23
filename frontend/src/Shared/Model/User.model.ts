@@ -1,5 +1,6 @@
-// models/LocationType.ts
+
 import { Deserializable } from "../Interface/deserializable";
+import { Profile } from "./Profile.model";
 
 export class User implements Deserializable {
   id?: number;
@@ -8,6 +9,7 @@ export class User implements Deserializable {
   custom_id?: string;
   email?: string = "";
   password?: string = "";
+  profile?: Profile = new Profile().deserialize({});
   created_at?: string;
   updated_at?: string;
 

@@ -1,5 +1,11 @@
 import axios from "axios";
 import { BaseUrl } from "./env/environment";
+import { useNavigate } from "react-router-dom";
+
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.common["Authorization"] = `Bearer ${
+  localStorage.getItem("User_Token") ? localStorage.getItem("User_Token") : ""
+}`;
 
 export class Http {
   constructor() {}
@@ -37,5 +43,19 @@ export class Http {
       this.Medium = "/api/";
     }
     return axios.put(BaseUrl + this.Medium + endpoint + "/" + id, data);
+  }
+
+  Logout() {
+    const navigate = useNavigate();
+    localStorage.clear();
+    navigate("/");
+  }
+
+  async IsAuthenticate() {
+    await this.get("User", false).then((result: any) => {
+      console.log(result);
+      return true;
+    });
+    return false;
   }
 }

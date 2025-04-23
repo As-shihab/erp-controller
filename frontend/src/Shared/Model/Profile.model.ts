@@ -1,10 +1,12 @@
 
 import { Deserializable } from "../Interface/deserializable";
 
-export class LocationType implements Deserializable {
+export class Profile implements Deserializable {
   id?: number;
   active?: boolean = true;
-  name?: string = "";
+  first_name?: string = "";
+  mid_name?: string ="";
+  last_name?: string = "";
   custom_id?: string;
   created_at?: string;
   updated_at?: string;

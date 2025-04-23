@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
             'name' => 'As Shihab',
             'email' => 'study.shihab@gmail.com',
             'password' => bcrypt('As@123456'),
+            'ip_address' => '127.0.0.1'
         ]);
         
     }
