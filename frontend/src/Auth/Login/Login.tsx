@@ -26,7 +26,7 @@ export default function Login() {
       .then((res: any) => {
         console.log(res.data);
        localStorage.setItem('User_Token' , res.data.User_token);
-      
+      location.reload();
         closeAction();
       })
       .catch((err: any) => {
@@ -45,7 +45,7 @@ export default function Login() {
   
   };
   return (
-    <div className="login-container">
+    <div className="login-container login">
       <form className="login-box">
         <h2 className="flex items-center justify-center gap-3">
           <FaLock /> <b>Login</b>

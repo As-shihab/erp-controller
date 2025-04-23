@@ -51,11 +51,8 @@ export class Http {
     navigate("/");
   }
 
-  async IsAuthenticate() {
-    await this.get("User", false).then((result: any) => {
-      console.log(result);
-      return true;
-    });
-    return false;
-  }
+IsAuthenticate(): boolean {
+  const token = localStorage.getItem("User_Token");
+  return !!token;
+}
 }

@@ -1,5 +1,5 @@
 /* Full-screen blurred background overlay */
-body {
+.login {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -10,13 +10,13 @@ body {
 }
 
 /* Frosted background overlay */
-body::before {
+.login::before {
   content: "";
   position: absolute;
   inset: 0;
   backdrop-filter: blur(55px);
   -webkit-backdrop-filter: blur(55px);
-  background-color: rgba(0, 0, 0, 0.541); /* Optional: dark tint */
+  background-color: rgba(0, 0, 0, 0.541);
   z-index: 0;
 }
 

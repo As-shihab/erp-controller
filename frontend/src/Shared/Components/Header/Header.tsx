@@ -16,8 +16,9 @@ export default function Header() {
     navigate("/");
   };
   return (
-    <>
+
       <ShellBar
+        className="my-2"
         logo={<img onClick={Navigate} alt="SAP Logo" src={Logo} />}
         menuItems={
           <>
@@ -47,6 +48,6 @@ export default function Header() {
       >
         <ShellBarItem count="3" icon="add" text="ShellBarItem" />
       </ShellBar>
-    </>
+ 
   );
 }
