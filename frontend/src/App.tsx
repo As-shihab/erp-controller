@@ -6,7 +6,9 @@ import { useState } from "react";
 import "@ui5/webcomponents-react/dist/Assets.js";
 import { setTheme } from "@ui5/webcomponents-base";
 import { ThemeProvider } from "@ui5/webcomponents-react";
-setTheme("sap_horizon_dark");
+const UserTheme = localStorage.getItem("UserTheme");
+setTheme(UserTheme?? "");
+
 function App() {
   const [refreshTable, setRefrashTable] = useState(false);
   return (

@@ -9,14 +9,14 @@ import {
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import "@ui5/webcomponents/dist/Assets.js";
 import { Outlet, useNavigate } from "react-router-dom";
-export default function PropertyPro() {
+export default function BaseData() {
     const navigate = useNavigate();
   return (
     <>
-      <div className="relative  h-[calc(100vh-52px)]">
+      <div className="relative  h-[calc(100vh-60px)]">
         <NavigationLayout
           mode="Expanded"
-          
+           style={{margin:'12px', gap:'12px', borderRadius:'12px'}}
         
           sideContent={
             <SideNavigation
@@ -33,13 +33,6 @@ export default function PropertyPro() {
               data-key="/"
               />
 
-              <SideNavigationGroup expanded text="Group 2">
-                
-                  <SideNavigationItem data-key="location-types" icon="history" text="Item 4" />
-     
-                <SideNavigationItem icon="source-code" text="Item 5" />
-                <SideNavigationItem icon="background" text="Item 6" />
-              </SideNavigationGroup>
 
 
                 <SideNavigationItem
@@ -59,25 +52,13 @@ export default function PropertyPro() {
                 target="_blank"
                 text="Legal"
               />
-              <SideNavigationItem
-                href="https://www.sap.com/about/legal/privacy.html"
-                icon="locked"
-                slot="fixedItems"
-                target="_blank"
-                text="Privacy"
-              />
-              <SideNavigationItem
-                href="https://www.sap.com/terms-of-use"
-                icon="document-text"
-                slot="fixedItems"
-                target="_blank"
-                text="Terms of Use"
-              />
+          
+             
             </SideNavigation>
           }
         >
           <div className="  h-full  rounded-lg shadow-lg">
-           <Card className="h-full">
+           <Card className="h-[calc(100vh-89px)]">
              <Outlet />
            </Card>
           </div>

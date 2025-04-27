@@ -5,26 +5,49 @@ import {
   Input,
   Icon,
   ShellBarItem,
+  UserMenu,
+  UserMenuAccount,
+  UserMenuItem,
 } from "@ui5/webcomponents-react";
+
 import Logo from "../../../../public/control.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
   const Navigate = () => {
-    alert()
+    alert();
     navigate("/");
   };
   return (
-
+    <>
       <ShellBar
         className="my-2"
         logo={<img onClick={Navigate} alt="SAP Logo" src={Logo} />}
         menuItems={
           <>
-            <ListItemStandard data-key="1">Menu Item 1</ListItemStandard>
-            <ListItemStandard data-key="2">Menu Item 2</ListItemStandard>
-            <ListItemStandard data-key="3">Menu Item 3</ListItemStandard>
+            <ListItemStandard
+              onClick={() => {
+                localStorage.setItem("UserTheme", "sap_horizon_dark");
+                location.reload();
+              }}
+              selected
+              data-key="sap_horizon_dark"
+            >
+              sap_horizon_dark
+            </ListItemStandard>
+            <ListItemStandard
+              onClick={() => {
+                localStorage.setItem("UserTheme", "sap_horizon_hcb");
+                location.reload();
+              }}
+              data-key="sap_belize"
+            >
+              sap_belize
+            </ListItemStandard >
+            <ListItemStandard onClick={()=>{localStorage.removeItem("UserTheme"); location.reload()}} data-key="sap_belize_plus">
+              Menu Item 3
+            </ListItemStandard>
           </>
         }
         notificationsCount="10"
@@ -35,19 +58,20 @@ export default function Header() {
         onProductSwitchClick={function Xs() {}}
         onProfileClick={function Xs() {}}
         onSearchButtonClick={function Xs() {}}
-        primaryTitle="Shell Bar"
+        primaryTitle="Themes"
         profile={
           <Avatar>
             <img src="https://sap.github.io/ui5-webcomponents-react/v2/assets/Person-B7wHqdJw.png" />
           </Avatar>
         }
-        searchField={<Input icon={<Icon name="search" />} showClearIcon />}
         secondaryTitle="Control panel | shihab"
         showNotifications
         showProductSwitch
       >
         <ShellBarItem count="3" icon="add" text="ShellBarItem" />
       </ShellBar>
- 
+
+      <UserMenu open={true}>hello</UserMenu>
+    </>
   );
 }
