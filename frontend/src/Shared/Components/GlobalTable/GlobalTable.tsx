@@ -14,7 +14,7 @@ import { GlobalContext } from "../../context/GlobalContext";
 export default function GlobalTable(props: any) {
   const { refreshTable, setRefrashTable } = useContext(GlobalContext);
   const { columns, NewButtonText, newButtonToggle, network } = props;
-  const { endpoint, isOdata, Model,  } = network;
+  const { endpoint, isOdata, Model } = network;
   // StaticData
   const { isNew, setNew } = newButtonToggle;
   const http = new Http();
@@ -60,7 +60,7 @@ export default function GlobalTable(props: any) {
   };
 
   return (
-    <div style={{ padding: "5px"} }>
+    <div style={{ padding: "5px" }}>
       <Bar
         design="Header"
         startContent={
@@ -90,20 +90,18 @@ export default function GlobalTable(props: any) {
 
       <AnalyticalTable
         style={{
-          height:'100vh',
+          height: "100%",
           minWidth: "100%",
           backgroundColor: "white",
         }}
-        className="h-sreen"
+
         headerRowHeight={40}
         rowHeight={40}
         columns={TableColumns}
         data={TableData}
         loading={isLoading}
-        minRows={40}
-        // additionalEmptyRowsCount={
-        // TableData.length < 20 ? 20 - TableData.length : 0
-        // }
+        minRows={10}
+
       />
 
       {/* For debugging */}

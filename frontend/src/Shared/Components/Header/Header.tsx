@@ -34,7 +34,7 @@ export default function Header() {
               selected
               data-key="sap_horizon_dark"
             >
-              sap_horizon_dark
+              Horizon Dark
             </ListItemStandard>
             <ListItemStandard
               onClick={() => {
@@ -43,10 +43,10 @@ export default function Header() {
               }}
               data-key="sap_belize"
             >
-              sap_belize
+              Hight Contrest
             </ListItemStandard >
             <ListItemStandard onClick={()=>{localStorage.removeItem("UserTheme"); location.reload()}} data-key="sap_belize_plus">
-              Menu Item 3
+              Default
             </ListItemStandard>
           </>
         }

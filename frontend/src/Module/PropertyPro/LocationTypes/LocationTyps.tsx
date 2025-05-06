@@ -3,7 +3,7 @@ import GlobalTable from "../../../Shared/Components/GlobalTable/GlobalTable";
 import Type from "./Components/Type";
 import { LocationType } from "../../../Shared/Model/LocationType";
 import { Button, Icon } from "@ui5/webcomponents-react";
-import {  useDeleteEntity } from "../../../Shared/Components/Entity/DeleteEntity";
+import { useDeleteEntity } from "../../../Shared/Components/Entity/DeleteEntity";
 
 export default function LocationTyps() {
   const deleteEntity = useDeleteEntity();
@@ -46,17 +46,20 @@ export default function LocationTyps() {
       id: "actions",
       width: 100,
       className: "custom-class-name",
-      hAlign: "Center" ,
+      hAlign: "Center",
       Cell: ({ row }: any) => (
         <div>
-          <Button icon="edit" design="Transparent" onClick={() => {
-          
-          }}></Button>
+          <Button icon="edit" design="Transparent" onClick={() => {}}></Button>
           <Button
             icon="delete"
             design="Transparent"
-            onClick={() => {deleteEntity('LocationTypes', locationtype.deserialize(row.original))}}
-            disabled={ locationtype.id === row.original.id}
+            onClick={() => {
+              deleteEntity(
+                "LocationTypes",
+                locationtype.deserialize(row.original)
+              );
+            }}
+            disabled={locationtype.id === row.original.id}
           ></Button>
         </div>
       ),
