@@ -44,6 +44,7 @@ export default function GlobalTable(props: any) {
             new Model().deserialize(data)
           );
           setTableData(formatted);
+          console.log("Formatted data:", formatted);
         } else {
           setTableData([]);
         }
@@ -100,7 +101,8 @@ export default function GlobalTable(props: any) {
         columns={TableColumns}
         data={TableData}
         loading={isLoading}
-        minRows={10}
+        minRows={20}
+    
 
       />
 

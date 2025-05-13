@@ -2,12 +2,10 @@ import {
   ShellBar,
   ListItemStandard,
   Avatar,
-  Input,
-  Icon,
   ShellBarItem,
   UserMenu,
-  UserMenuAccount,
-  UserMenuItem,
+  Switch,
+
 } from "@ui5/webcomponents-react";
 
 import Logo from "../../../../public/control.png";
@@ -23,9 +21,10 @@ export default function Header() {
     <>
       <ShellBar
         className="my-2"
-        logo={<img onClick={Navigate} alt="SAP Logo" src={Logo} />}
+        logo={<img onClick={Navigate} alt="SAP Logo" src={Logo} /> }
         menuItems={
           <>
+      
             <ListItemStandard
               onClick={() => {
                 localStorage.setItem("UserTheme", "sap_horizon_dark");
@@ -50,9 +49,9 @@ export default function Header() {
             </ListItemStandard>
           </>
         }
-        notificationsCount="10"
+        notificationsCount="300"
         onContentItemVisibilityChange={function Xs() {}}
-        onLogoClick={function Xs() {}}
+        onLogoClick={function Xs() {navigate('/')}}
         onMenuItemClick={function Xs() {}}
         onNotificationsClick={function Xs() {}}
         onProductSwitchClick={function Xs() {}}
@@ -69,6 +68,7 @@ export default function Header() {
         showProductSwitch
       >
         <ShellBarItem count="3" icon="add" text="ShellBarItem" />
+         <Switch onChange={function Xs(){}} />
       </ShellBar>
 
       <UserMenu open={true}>hello</UserMenu>
