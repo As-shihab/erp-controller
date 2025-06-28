@@ -59,7 +59,7 @@ export default function GlobalTable(props: any) {
             <Button
               icon="delete"
               design="Transparent"
-              onClick={onDelete}
+              onClick={() => onDelete(row as any)}
             ></Button>
           </div>
         ),
