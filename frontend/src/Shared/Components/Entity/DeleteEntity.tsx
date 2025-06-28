@@ -7,12 +7,12 @@ export const useDeleteEntity = () => {
   const { setRefrashTable } = useContext(GlobalContext);
   const http = new Http();
 
-  const deleteEntity = async (endpoint: string, model: any) => {
+  const deleteEntity = async (endpoint: string, id: number , Odata: boolean , model?: any | undefined) => {
     const result = await IsConfirm("delete");
 
     if (result.isConfirmed) {
       try {
-        await http.delete(endpoint, true, model.id);
+        await http.delete(endpoint, Odata ? true : false, id);
         Toaster("delete");
         setRefrashTable(true);
       } catch (err) {

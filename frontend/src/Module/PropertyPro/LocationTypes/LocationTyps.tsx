@@ -56,7 +56,8 @@ export default function LocationTyps() {
             onClick={() => {
               deleteEntity(
                 "LocationTypes",
-                locationtype.deserialize(row.original)
+                row.original.id,
+                true,
               );
             }}
             disabled={locationtype.id === row.original.id}

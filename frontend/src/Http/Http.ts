@@ -7,6 +7,7 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${
   localStorage.getItem("User_Token") ? localStorage.getItem("User_Token") : ""
 }`;
 
+
 export class Http {
   constructor() {}
   Medium: string = "";
@@ -28,7 +29,7 @@ export class Http {
     return axios.post(BaseUrl + this.Medium + endpoint, data);
   }
 
-  delete(endpoint: string, Odata: boolean, id: string | number) {
+  delete(endpoint: string, Odata: boolean, id: number) {
     if (Odata) {
       this.Medium = "/odata/";
     } else {

@@ -1,8 +1,6 @@
 import {
-  NavigationLayout,
   SideNavigation,
   SideNavigationItem,
-  SideNavigationGroup,
   Card,
   SideNavigationSubItem,
 } from "@ui5/webcomponents-react";
@@ -25,7 +23,7 @@ export default function PropertyPro() {
       >
         <Card className="h-full w-auto">
           <SideNavigation
-          collapsed={true}
+          collapsed={false}
             className="h-[calc(100vh-100px)]"
             fixedItems={
               <>
@@ -48,7 +46,7 @@ export default function PropertyPro() {
               <SideNavigationSubItem text="From My Team" data-key="/propertypro/location-types" />
               <SideNavigationSubItem text="From Other Teams" />
             </SideNavigationItem>
-            <SideNavigationItem icon="locate-me" selected text="Locations" />
+            <SideNavigationItem icon="locate-me" selected text="Users" data-key="/users" />
             <SideNavigationItem icon="calendar" text="Events">
               <SideNavigationSubItem text="Local" />
               <SideNavigationSubItem text="Others" />

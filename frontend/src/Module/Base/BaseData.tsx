@@ -1,68 +1,64 @@
 import {
-  NavigationLayout,
   SideNavigation,
   SideNavigationItem,
-  SideNavigationGroup,
   Card,
   SideNavigationSubItem,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import "@ui5/webcomponents/dist/Assets.js";
 import { Outlet, useNavigate } from "react-router-dom";
-export default function BaseData() {
-    const navigate = useNavigate();
+export default function PropertyPro() {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="relative  h-[calc(100vh-60px)]">
-        <NavigationLayout
-          mode="Expanded"
-           style={{margin:'12px', gap:'12px', borderRadius:'12px'}}
-        
-          sideContent={
-            <SideNavigation
-              onSelectionChange={(e) => {
-        const selectedKey = e.detail.item.dataset.key;
-        navigate(selectedKey? selectedKey : '/');
-      }}
-              slot="sideContent"
-              className="rounded-2xl "
-            >
-              <SideNavigationItem
-                icon="Chart-Tree-Map"
-                text="OverView"
-              data-key="/"
-              />
-
-
-
+    
+      <div
+        className="text-white flex justify-evenly overflow-hidden p-3 h-[calc(100vh-65px)]  "
+        style={{
+          margin: "8px",
+          gap: "12px",
+          borderRadius: "12px",
+          padding: "7px",
+        }}
+      >
+        <Card className="h-full w-auto">
+          <SideNavigation
+          collapsed={false}
+            className="h-[calc(100vh-100px)]"
+            fixedItems={
+              <>
                 <SideNavigationItem
-    expanded
-    icon="group"
-    text="People"
-    slot="fixedItems"
-     
-  >
-    <SideNavigationSubItem icon="group" text="From My Team" />
-    <SideNavigationSubItem text="From Other Teams" />
-  </SideNavigationItem>
-              <SideNavigationItem
-                href="https://www.sap.com/about/legal/impressum.html"
-                icon="compare"
-                slot="fixedItems"
-                target="_blank"
-                text="Legal"
-              />
-          
-             
-            </SideNavigation>
-          }
-        >
-          <div className="  h-full  rounded-lg shadow-lg">
-           <Card className="h-[calc(100vh-89px)]">
-             <Outlet />
-           </Card>
-          </div>
-        </NavigationLayout>
+                  href="https://www.sap.com/index.html"
+                  icon="chain-link"
+                  target="_blank"
+                  text="External Link"
+                />
+                <SideNavigationItem icon="history" text="History" />
+              </>
+            }
+            onSelectionChange={(e) => {
+              const selectedKey = e.detail.item.dataset.key;
+              navigate(selectedKey??"*");
+            }}
+          >
+            <SideNavigationItem icon="key-user-settings" text="User Management" data-key="user-management">
+              <SideNavigationSubItem text="Roles & Permissions" data-key="user-management/roles-permission" />
+            </SideNavigationItem>
+            <SideNavigationItem expanded icon="building" data-key="/propertypro"  text="Apartments">
+              <SideNavigationSubItem text="From My Team" data-key="/propertypro/location-types" />
+              <SideNavigationSubItem text="From Other Teams" />
+            </SideNavigationItem>
+            <SideNavigationItem icon="locate-me" selected text="Users" data-key="/users" />
+            <SideNavigationItem icon="calendar" text="Events">
+              <SideNavigationSubItem text="Local" />
+              <SideNavigationSubItem text="Others" />
+            </SideNavigationItem>
+          </SideNavigation>
+        </Card>
+
+        <Card>
+          <Outlet />
+        </Card>
       </div>
     </>
   );

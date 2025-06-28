@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function HomeLayout() {
   return (
     <>
-      <div className="grid gap-3  grid-cols-5">
+      <div className="grid gap-3 mt-4 grid-cols-5">
            <Link to="/base-data">
         <Card data-key="/propertypro">
           <div className="card rounded-sm shadow-sm ">
@@ -21,7 +21,7 @@ export default function HomeLayout() {
         </Card></Link>
 
     <Link to="/propertypro">
-        <Card data-key="/propertypro">
+        <Card  data-key="/propertypro">
           <div className="card rounded-sm shadow-sm ">
             <Bar
               design="Header"
