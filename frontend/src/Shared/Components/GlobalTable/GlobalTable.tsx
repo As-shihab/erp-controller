@@ -74,6 +74,9 @@ export default function GlobalTable(props: any) {
     }
   }, [refreshTable]);
 
+
+
+  // fetch data from api
   const FetchData = () => {
     console.log(columns);
     setLoading(true);
@@ -98,6 +101,8 @@ export default function GlobalTable(props: any) {
       });
   };
 
+
+  // end fetch data
   const closeAction = () => {
     setRefrashTable(false);
     setLoading(false);

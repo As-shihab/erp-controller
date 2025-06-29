@@ -35,7 +35,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'platform' => $request->platform ? $request->platform : 'AptiGen',
+                'platform' => $request->platform ? $request->platform : 'APTIGEN',
                 'password' => Hash::make($request->password),
             ]);
 
@@ -118,7 +118,8 @@ class UserController extends Controller
         $otp = rand(100000, 999999); // Generate a random 6-digit OTP
         $user = $request->user();
         $user->user_otp = $otp;
-        $user->otp_verification_token = now()->addMinutes(10);
+        $user->otp_verification_token = now();
+        $user->otp_verification_token_expiry = now()->addMinutes(10);
         $user->save();
 
         Mail::to($user->email)->send(new \App\Mail\OtpMail($otp));

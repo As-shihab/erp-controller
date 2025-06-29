@@ -7,20 +7,29 @@ export default function UserList() {
   const columns = [
     {
       Header: "Active",
-      accessor: "active",
+      accessor: "is_active",
       width: 80,
       hAlign: "Center",
       Cell: ({ value }: any) =>
         value ? <Icon name="accept" /> : <Icon name="decline" />,
     },
+    { Header: "Custom Id", accessor: "custom_id" },
 
     {
       Header: "Name",
       accessor: "name",
     },
+
     {
       Header: "Email",
       accessor: "email",
+    },
+    {
+      Header: "Email Verified",
+      accessor: "email_verified",
+      hAlign: "Center",
+      Cell: ({ value }: any) =>
+        value ? <Icon className="text-green-400" name="accept" /> : <Icon className="text-red-500" name="decline" />,
     },
     {
       Header: "Created At",
@@ -30,7 +39,6 @@ export default function UserList() {
       Header: "Updated At",
       accessor: "created_at",
     },
-
   ];
 
   return (
