@@ -12,50 +12,48 @@ use Mockery\Expectation;
 class UserController extends Controller
 {
 
-   public function Signup(Request $request)
-{
-    try {
-        // Validate incoming request
-        $validate = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-        ]);
+    public function Signup(Request $request)
+    {
+        try {
+            // Validate incoming request
+            $validate = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+            ]);
 
-        if ($validate->fails()) {
+            if ($validate->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validate->errors()
+                ], 422);
+            }
+
+            // Create user
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            // Generate API token
+            $user_token = $user->createToken('User-Token')->plainTextToken;
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User created successfully',
+                'token' => $user_token,
+                'user' => $user
+            ], 201);
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Validation error',
-                'errors' => $validate->errors()
-            ], 422);
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        // Create user
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        // Generate API token
-        $user_token = $user->createToken('User-Token')->plainTextToken;
-
-        return response()->json([
-            'status' => true,
-            'message' => 'User created successfully',
-            'token' => $user_token,
-            'user' => $user
-        ], 201);
-
-    } catch (\Exception $e) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Something went wrong',
-            'error' => $e->getMessage()
-        ], 500);
     }
-}
-
 
     public function Login(Request $request)
     {
@@ -74,8 +72,7 @@ class UserController extends Controller
                 ], 401);
             }
 
-            $user = User::where('email', $request->email)->firstOrFail();
-
+            $user = User::where('email', $request->email)->first();
             if (!$user) {
                 return response()->json([
                     'message' => 'User not found'
@@ -89,7 +86,9 @@ class UserController extends Controller
             }
 
             $token = $user->createToken('auth_token')->plainTextToken;
-
+            $user->login_token = $token;
+            $user->login_token_expiry = now()->addDays(7);
+            $user->save();
             return response()->json([
                 'User_token' => $token,
                 'user' => $user
@@ -108,5 +107,17 @@ class UserController extends Controller
         return response()->json([
             'message' => 'logout successfully'
         ], 200);
+    }
+
+    // ================ OTP Verification Methods ================
+
+    public function SendOtp(Request $request)
+    {
+          $otp = rand(100000, 999999); // Generate a random 6-digit OTP
+          $user = $request->user();
+          $user->user_otp = $otp;
+          $user->verification_token_expiry = now()->addMinutes(10); // Set expiry
+
+        return response()->json(['message' => 'OTP sent successfully']);
     }
 }
