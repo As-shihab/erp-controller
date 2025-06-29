@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Mockery\Expectation;
 
@@ -34,6 +35,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'platform' => $request->platform ? $request->platform : 'AptiGen',
                 'password' => Hash::make($request->password),
             ]);
 
@@ -113,11 +115,13 @@ class UserController extends Controller
 
     public function SendOtp(Request $request)
     {
-          $otp = rand(100000, 999999); // Generate a random 6-digit OTP
-          $user = $request->user();
-          $user->user_otp = $otp;
-          $user->verification_token_expiry = now()->addMinutes(10); // Set expiry
+        $otp = rand(100000, 999999); // Generate a random 6-digit OTP
+        $user = $request->user();
+        $user->user_otp = $otp;
+        $user->otp_verification_token = now()->addMinutes(10);
+        $user->save();
 
+        Mail::to($user->email)->send(new \App\Mail\OtpMail($otp));
         return response()->json(['message' => 'OTP sent successfully']);
     }
 }
