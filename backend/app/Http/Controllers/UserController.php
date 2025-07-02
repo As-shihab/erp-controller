@@ -92,7 +92,7 @@ class UserController extends Controller
             $user->login_token_expiry = now()->addDays(7);
             $user->save();
             return response()->json([
-                'User_token' => $token,
+                'token' => $token,
                 'user' => $user
             ]);
         } catch (Expectation $e) {
@@ -122,7 +122,7 @@ class UserController extends Controller
         $user->otp_verification_token_expiry = now()->addMinutes(10);
         $user->save();
 
-        Mail::to($user->email)->send(new \App\Mail\OtpMail($otp));
+        Mail::to($user->email)->send(new \App\Mail\OtpMail($otp , $user));
         return response()->json(['message' => 'OTP sent successfully']);
     }
 }

@@ -18,11 +18,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>Hello,</h2>
+        <h2>Hello, {{Auth::user()->name}}</h2>
         <p>Your One-Time Password (OTP) is:</p>
         <p class="otp">{{ $otp }}</p>
         <p>This code will expire in 5 minutes. Do not share it with anyone.</p>
         <div class="footer">© {{ date('Y') }} {{ config('app.name') }}</div>
+        
     </div>
 </body>
 </html>
